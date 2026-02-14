@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://duu30bgau0hnn"]
+[gd_scene load_steps=9 format=3 uid="uid://duu30bgau0hnn"]
 
 [ext_resource type="PackedScene" uid="uid://qpsuudvelqrq" path="res://scenes/dwarf.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://bpqhbi3yanvbn" path="res://assets/TilesetExample.png" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://cj5vx8ybqn1mc" path="res://scenes/exit.tscn" id="3_exit"]
+[ext_resource type="PackedScene" uid="uid://bqkn1x7ybm5ph" path="res://scenes/coin.tscn" id="4_coin"]
+[ext_resource type="PackedScene" uid="uid://dl8kn3vxybh2m" path="res://scenes/ui.tscn" id="5_ui"]
+[ext_resource type="Script" uid="uid://d1f3r3xlrijs5" path="res://scripts/game.gd" id="6_game"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -321,6 +325,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 
 [node name="Game" type="Node2D"]
+script = ExtResource("6_game")
 
 [node name="Dwarf" parent="." instance=ExtResource("1_uwrxv")]
 position = Vector2(1, -5)
@@ -328,7 +333,31 @@ position = Vector2(1, -5)
 [node name="Camera2D" type="Camera2D" parent="Dwarf"]
 position = Vector2(-1, 5)
 zoom = Vector2(4, 4)
+limit_left = -150
+limit_top = -100
+limit_right = 300
+limit_bottom = 150
 position_smoothing_enabled = true
+
+[node name="Exit" parent="." instance=ExtResource("3_exit")]
+position = Vector2(136, -5)
+
+[node name="Coin" parent="." instance=ExtResource("4_coin")]
+position = Vector2(30, -10)
+
+[node name="Coin2" parent="." instance=ExtResource("4_coin")]
+position = Vector2(50, -10)
+
+[node name="Coin3" parent="." instance=ExtResource("4_coin")]
+position = Vector2(70, -10)
+
+[node name="Coin4" parent="." instance=ExtResource("4_coin")]
+position = Vector2(90, 30)
+
+[node name="Coin5" parent="." instance=ExtResource("4_coin")]
+position = Vector2(110, 10)
+
+[node name="UI" parent="." instance=ExtResource("5_ui")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_lbhrr")

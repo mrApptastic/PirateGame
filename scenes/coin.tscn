@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqkn1x7ybm5ph"]
+
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_coin"]
+[ext_resource type="Texture2D" uid="uid://bpqhbi3yanvbn" path="res://assets/TilesetExample.png" id="2_tileset"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_coin"]
+radius = 6.0
+
+[node name="Coin" type="Area2D"]
+script = ExtResource("1_coin")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tileset")
+region_enabled = true
+region_rect = Rect2(416, 48, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_coin")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
