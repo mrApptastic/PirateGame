@@ -60,11 +60,14 @@ func open_chest() -> void:
 
 
 func _spawn_gold() -> void:
-	for i in range(5):
+	var coin_count := 5
+	var base_value := gold_amount / coin_count
+	var remainder := gold_amount % coin_count
+	for i in range(coin_count):
 		var coin_scene := preload("res://scenes/collectibles/gold_coin.tscn")
 		var coin := coin_scene.instantiate()
 		coin.global_position = global_position + Vector2(0, -16)
-		coin.gold_value = gold_amount / 5
+		coin.gold_value = base_value + (1 if i < remainder else 0)
 		coin.spawn_velocity = Vector2(randf_range(-60, 60), randf_range(-120, -60))
 		get_parent().call_deferred("add_child", coin)
 		await get_tree().create_timer(0.05).timeout

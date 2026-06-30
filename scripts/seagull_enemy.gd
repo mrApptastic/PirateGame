@@ -46,7 +46,7 @@ func _fly(delta: float) -> void:
 		fly_direction *= -1
 		fly_timer = randf_range(2.0, 4.0)
 
-	visual.flip_h = fly_direction < 0
+	visual.scale.x = -1 if fly_direction < 0 else 1
 
 
 func _dive(delta: float) -> void:

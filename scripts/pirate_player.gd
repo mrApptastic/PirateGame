@@ -173,6 +173,8 @@ func _handle_attack() -> void:
 		attack_particles.emitting = true
 		animated_sprite.play("Attack")
 		await animated_sprite.animation_finished
+		if is_dead or not is_inside_tree():
+			return
 		sword_collision.disabled = true
 		is_attacking = false
 		attack_particles.emitting = false

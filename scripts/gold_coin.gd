@@ -5,6 +5,8 @@ const ATTRACT_SPEED := 200.0
 const ATTRACT_RANGE := 50.0
 const BOB_SPEED := 3.0
 const BOB_AMOUNT := 2.0
+const SPAWN_VELOCITY_DECAY := 120.0
+const SPAWN_GRAVITY := 200.0
 
 var gold_value := 1
 var is_attracted := false
@@ -37,8 +39,8 @@ func _physics_process(delta: float) -> void:
 		position.y = initial_y + sin(time * BOB_SPEED) * BOB_AMOUNT
 		# Apply spawn velocity with decay
 		position += spawn_velocity * delta
-		spawn_velocity = spawn_velocity.move_toward(Vector2.ZERO, 120 * delta)
-		spawn_velocity.y += 200 * delta  # gravity
+		spawn_velocity = spawn_velocity.move_toward(Vector2.ZERO, SPAWN_VELOCITY_DECAY * delta)
+		spawn_velocity.y += SPAWN_GRAVITY * delta
 
 		# Check for nearby player to attract
 		var players := get_tree().get_nodes_in_group("player")

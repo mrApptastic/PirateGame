@@ -2,7 +2,6 @@ extends Area2D
 ## Water Hazard - Damages player and applies slow/drowning effect
 
 @export var damage_interval := 1.0
-@export var slow_factor := 0.4
 
 var player_in_water := false
 var damage_timer := 0.0
