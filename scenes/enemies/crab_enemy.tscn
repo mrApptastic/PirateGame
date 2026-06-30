@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://crab_enemy_scene"]
+
+[ext_resource type="Script" path="res://scripts/crab_enemy.gd" id="1_crab"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crab"]
+size = Vector2(12, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crab"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Scuttle",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"Hide",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Charge",
+"speed": 14.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"Hurt",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"Death",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_crab_detect"]
+radius = 60.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crab_body"]
+size = Vector2(14, 8)
+
+[node name="CrabEnemy" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_crab")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_crab")
+
+[node name="CrabBody" type="ColorRect" parent="."]
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 7.0
+offset_bottom = 0.0
+color = Color(0.9, 0.3, 0.2, 1)
+
+[node name="CrabEyeL" type="ColorRect" parent="CrabBody"]
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 5.0
+offset_bottom = 0.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="CrabEyeR" type="ColorRect" parent="CrabBody"]
+offset_left = 9.0
+offset_top = -3.0
+offset_right = 12.0
+offset_bottom = 0.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="ClawL" type="ColorRect" parent="CrabBody"]
+offset_left = -4.0
+offset_top = 2.0
+offset_right = 0.0
+offset_bottom = 6.0
+color = Color(1, 0.4, 0.3, 1)
+
+[node name="ClawR" type="ColorRect" parent="CrabBody"]
+offset_left = 14.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 6.0
+color = Color(1, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_crab")
+
+[node name="PlayerDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
+shape = SubResource("CircleShape2D_crab_detect")
+
+[node name="FloorRay" type="RayCast2D" parent="."]
+position = Vector2(8, 0)
+target_position = Vector2(0, 8)
+
+[node name="WallRay" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+target_position = Vector2(8, 0)
